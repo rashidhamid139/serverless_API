@@ -7,7 +7,7 @@ isContainerized: false
 webPlatform: aws-lambda
 dbPlatform: null
 authors:
-    - Carlos Cepeda
+    - Rashid
 date: 2020-12-01
 ---
 
