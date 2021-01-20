@@ -1,0 +1,19 @@
+# Starter pipeline
+
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+      - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: zipdocumentation@0
+  inputs:
+    DocLocation: 'docs'
+    PackageName: 'api-f5-cloud-docs'

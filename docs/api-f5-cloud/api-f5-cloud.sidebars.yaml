@@ -1,0 +1,16 @@
+api-f5-cloud:
+  context:
+      title: api-f5-cloud
+      description: APIs to configure F5 servers on Cloud to loadbalance traffict to new applications 
+      type: api
+      tags:
+      - name: Azure
+        color: "#339944"
+      - name: AWS
+        color: "#EEA511"
+  pages:
+  - page: api-f5-cloud/index.md
+    label: api-f5-cloud API
+  - group: API Reference
+    pages:
+      - page: api-f5-cloud/api-f5-cloud.page.yaml

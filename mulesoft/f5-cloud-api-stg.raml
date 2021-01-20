@@ -1,0 +1,354 @@
+#%RAML 1.0
+title: API-F5-CLOUD
+version: 1.0.0
+baseUri: https://automation2.deloitte.com/stg/network/f5-cloud/v1
+baseUriParameters: {}
+protocols:
+- HTTPS
+traits:
+  jwt:
+    headers:
+      authorization:
+        description: Bearer
+        type: string
+    responses:
+      400:
+        description: Token was not provided.
+      401:
+        description: Bad or expired token. To fix, you should re-authenticate the user.
+      403:
+        description: The client id validation failed.
+      405:
+        description: Invalid HTTP method.
+      503:
+        description: Error communicating with JWKS server.
+documentation:
+- title: API-F5-CLOUD
+  content: This is an API for configuring F5 LTM servers on Deloitte Cloud for routing traffic to new Web APPs
+types:
+  ingress:
+    displayName: ingress
+    description: this is the ingress resource object
+    type: object
+    properties:
+      cloud_provider:
+        required: true
+        displayName: cloud_provider
+        description: name of the cloud provider where the F5 LTM load balancer has to be configured
+        type: string
+      region:
+        required: true
+        displayName: region
+        description: name of the region on the cloud provider where the F5 LTM load balancer has to be configured
+        type: string
+      environment:
+        required: true
+        displayName: environment
+        description: name of the environment
+        type: string
+      tcp_upload:
+        required: false
+        displayName: tcp_upload
+        description: Is TCP Upload requied? yes or no
+        type: string
+        default: no
+      health_monitor:
+        required: false
+        displayName: health_monitor
+        description: health_monitor type? tcp http or https
+        type: string
+        default: tcp
+      ssl_terminate_f5:
+        required: true
+        displayName: ssl_terminate_f5
+        description: Is SSL terminated on F5? yes or no
+        type: string
+      ticket_number:
+        required: true
+        displayName: ticket_number
+        description: Ticket number from ServiceNow
+        type: string
+      fqdn:
+        required: true
+        displayName: fqdn
+        description: The Full Qualified Domain Name for the new appilcation
+        type: string
+      load_balancing_method:
+        required: true
+        displayName: load_balancing_method
+        description: The Load Balancing Method to be used by the F5 Load Balancer
+        type: string
+      members:
+        required: true
+        displayName: members
+        description: The member list and properties
+        type: string
+      key_file:
+        required: true
+        displayName: key_file
+        type: file
+      cert_file:
+        required: true
+        displayName: cert_file
+        type: file
+      f5_ips:
+        description: The f5 ip list and ports
+        type: string
+        required: false
+      vip_name:
+        description: Name of the Virtual Server to be configured on the F5 Server
+        example: virtual_server_sample_name_443
+        type: string
+        required: false
+  default_response:
+    displayName: default_response
+    type: object
+    properties:
+      status:
+        required: false
+        displayName: status
+        type: string
+        enum:
+        - ERROR
+        - SUCCESS
+      response:
+        required: false
+        displayName: response
+        type: string
+  IngressResponse:
+    displayName: IngressResponse
+    type: object
+    properties:
+      status:
+        required: false
+        default: SUCCESS
+        displayName: status
+        type: string
+      message:
+        required: false
+        default: INGRESS WAS CREATED SUCCESSFULLY
+        displayName: message
+        type: string
+/ingress:
+  post:
+    is: [jwt]
+    displayName: createingress
+    description: This operation is used for configuring F5 LTM servers on Deloitte Cloud for routing traffic to new Web APPs. It creates SSL Certificates, Pool & Members, and update Irules
+    body:
+      multipart/form-data:
+        type: object
+        properties:
+          cloud_provider:
+            required: true
+            displayName: cloud_provider
+            description: name of the cloud provider where the F5 LTM load balancer has to be configured
+            type: string
+          region:
+            required: true
+            displayName: region
+            description: name of the region on the cloud provider where the F5 LTM load balancer has to be configured
+            type: string
+          environment:
+            required: true
+            displayName: environment
+            description: name of the environment
+            type: string
+          tcp_upload:
+            required: false
+            displayName: tcp_upload
+            description: Is TCP Upload requied? yes or no
+            type: string
+            default: no
+          health_monitor:
+            required: false
+            displayName: health_monitor
+            description: health_monitor type? tcp http or https
+            type: string
+            default: tcp
+          ssl_terminate_f5:
+            required: true
+            displayName: ssl_terminate_f5
+            description: Is SSL terminated on F5? yes or no
+            type: string
+          ticket_number:
+            required: true
+            displayName: ticket_number
+            description: Ticket number from ServiceNow
+            type: string
+          fqdn:
+            required: true
+            displayName: fqdn
+            description: The Full Qualified Domain Name for the new appilcation
+            type: string
+          load_balancing_method:
+            required: true
+            displayName: load_balancing_method
+            description: The Load Balancing Method to be used by the F5 Load Balancer
+            type: string
+          members:
+            required: true
+            displayName: members
+            description: The member list and properties
+            type: string
+          key_file:
+            required: true
+            displayName: key_file
+            type: file
+          cert_file:
+            required: true
+            displayName: cert_file
+            type: file
+          f5_ips:
+            description: The f5 ip list and ports
+            type: string
+            required: false
+          vip_name:
+            description: Name of the Virtual Server to be configured on the F5 Server
+            type: string
+            required: false
+    headers:
+      username:
+        required: true
+        displayName: username
+        description: Your Deloitte AD Username
+        type: string
+    responses:
+      200:
+        description: on a succesful ingress created
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          application/json:
+            displayName: response
+            description: on a succesful ingress created
+            type: IngressResponse
+      400:
+        description: Error Response for invalid or missing user input
+        body:
+          application/json:
+            example:
+              value:
+                status: ERROR
+                response: Invalid or missing user input
+            description: Error Response for invalid or missing user input
+            type: default_response
+      401:
+        description: Error Response for unauthorized calls
+        body:
+          application/json:
+            example:
+              value:
+                status: ERROR
+                response: Unauthorized to perform this call
+            description: Error Response for unauthorized calls
+            type: default_response
+      405:
+        description: Error Response for Method not allowed
+        body:
+          application/json:
+            example:
+              value:
+                status: ERROR
+                response: Method not allowed this resource
+            description: Error Response for unauthorized calls
+            type: default_response
+      409:
+        description: Error Response for Duplicate Resource Found
+        body:
+          application/json:
+            example:
+              value:
+                status: ERROR
+                response: Resource already exists
+            description: Error Response for Duplicate Resource Found
+            type: default_response
+      500:
+        description: Error Response when there's error in code
+        body:
+          application/json:
+            example:
+              value:
+                status: ERROR
+                response: Internal Server Error
+            description: Error Response when there's error in code
+            type: default_response
+/validateip:
+  get:
+    is: [jwt]
+    description: This operation is used for that a given IP belongs to a given CIDR ip address block
+    displayName: validateip
+    queryParameters:
+      ip_address:
+        description: The IP address to be verified
+        type: string
+        required: true
+      cidr_block:
+        description: The cidr block to be used for verification
+        type: string
+        required: true
+    responses:
+      200:
+        description: on a succesful IP validation
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          application/json:
+            displayName: response
+            description: on a succesful validate ip
+            type: object
+            properties:
+              flag:
+                example: true
+                type: boolean
+              message:
+                example: Valid IP
+                type: string
+              status:
+                type: string
+                enum:
+                  - ERROR
+                  - SUCCESS
+      400:
+        description: Error Response for invalid or missing user input
+        body:
+          application/json:
+            type: object
+            properties:
+              message:
+                example: Please Provide required Parameters
+                type: string
+              status:
+                type: string
+                enum:
+                  - ERROR
+                  - SUCCESS
+      405:
+        description: Error Response for Method not allowed
+        body:
+          application/json:
+            example:
+              value:
+                status: ERROR
+                response: Method not allowed this resource
+            description: Error Response for unauthorized calls
+            type: default_response
+      500:
+        description: Error Response when there's error in code
+        body:
+          application/json:
+            type: object
+            properties:
+              message:
+                example: Internal Server Error. Exception on validating the IP.
+                type: string
+              status:
+                type: string
+                enum:
+                  - ERROR
+                  - SUCCESS

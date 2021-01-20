@@ -1,0 +1,67 @@
+service: apis-f5-cloud
+provider:
+  name: aws
+  runtime: python3.7
+  stage: ${opt:stage, 'dev', 'prd'}
+  region: ${opt:region, 'us-east-1'}
+  profile: default
+  apiName: apis-f5-cloud
+  timeout: 30
+  #vpc:
+  #  securityGroupIds:
+  #    - "sg-0c18eef947dd9a242"
+  #  subnetIds:
+  #    - "subnet-0df5291bcf2137149"
+  environment:
+    S3_BUCKET_NAME: f5-cloud-mapping-table-${self:provider.stage}
+    S3_BUCKET_FILENAME: f5_mapping_table.yml
+    DYNAMO_TABLE_AUTHZ: f5-cloud-authz
+    SECRET_MANAGER_ID: f5-cloud-secrets
+    environment: ${self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - secretsmanager:List
+        - secretsmanager:Describe
+        - secretsmanager:Get
+        - secretsmanager:GetSecretValue
+        - s3:GetObject
+      Resource: "*"
+
+  apiKeys:
+    - apis-f5-cloud-${self:provider.stage}-key
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
+functions:
+  ingress:
+    handler: ingress_handler.main
+    events:
+      - http:
+          path: /ingress
+          method: post
+          cors: true
+          private: true
+  validateip:
+    handler: validateip_handler.main
+    events:
+      - http:
+          path: /validateip
+          method: get
+          cors: true
+          private: true
+package:
+  exclude:
+    - node_modules/**
+    - .venv/**
+    - .requirements-cache/**

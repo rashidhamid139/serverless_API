@@ -1,0 +1,376 @@
+---
+aws:
+  us-east-1:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+  us-east-2:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+  us-west-1:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+  us-west-2:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+azure:
+  us-east-1:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+  us-east-2:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+  us-west-1:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+  us-west-2:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+gcp:
+  us-east-1:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+  us-east-2:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+  us-west-1:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+  us-west-2:
+    dev:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    stage:
+      f5:
+        ip1: 107.22.214.8
+        port1: 8443
+        ip2: 107.22.214.8
+        port2: 8443
+      tcp-upload:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+      redirect:
+        vip: "vz_usazsubemaeuwhub-pip-npd_1481"
+    prod:
+      f5:
+        ip1: 10.28.61.220
+        port1: 443
+        ip2: 10.28.61.220
+        port2: 443
+      tcp-upload:
+        vip: "vs_cirrus_test_443"
+      redirect:
+        vip: "vs_cirrus_test_443"

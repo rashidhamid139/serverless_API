@@ -1,0 +1,307 @@
+openapi: 3.0.2
+info:
+  description: This is an API for configuring F5 LTM servers on Deloitte Cloud for routing traffic to new Web APPs
+  version: "1.0.0"
+  title: API-F5-CLOUD
+  contact:
+    email: usapiaccelerationcenter@deloitte.com
+    name: US API Acceleration Center
+    url: https://automation2.deloitte.com/dev/network/f5-cloud/v1
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: Ingress
+    description: These Operations will be called by IP FLOW recipies to configure F5 Server to route traffic
+  - name: ValidateIP
+    description: This operation is used for that a given IP belongs to a given CIDR ip address block
+servers:
+ - description: F5 API
+   url: https://automation2.deloitte.com/dev/network/f5-cloud/v1
+
+paths:
+  /ingress:
+    post:
+      security:
+        - bearerAuth: []
+        - ApiAuthKey: []
+      operationId: createingress
+      tags:
+        - Ingress
+      description:
+          This operation is used for configuring F5 LTM servers on Deloitte Cloud for routing traffic to new Web APPs. It creates SSL Certificates, Pool & Members, and update Irules
+      parameters:
+        - in: header
+          name: username
+          description: Your Deloitte AD Username
+          schema:
+            type: string
+            pattern: \@deloitte.com$
+          required: true
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ingress'
+      responses:
+        '200':
+          description: on a succesful ingress created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: SUCCESS
+                    default: SUCCESS
+                  message:
+                    type: string
+                    example: INGRESS WAS CREATED SUCCESSFULLY
+                    default: INGRESS WAS CREATED SUCCESSFULLY
+        '400':
+          description: Error Response for invalid or missing user input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/default_response'
+              example:
+                status: ERROR
+                response: Invalid or missing user input
+        '401':
+          description: Error Response for unauthorized calls
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/default_response'
+              example:
+                status: ERROR
+                response: Unauthorized to perform this call
+        '405':
+          description: Error Response for Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/default_response'
+              example:
+                status: ERROR
+                response: Method not allowed this resource
+        '409':
+          description: Error Response for Duplicate Resource Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/default_response'
+              example:
+                status: ERROR
+                response: Resource already exists
+        '500':
+          description: Error Response when there's error in code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/default_response'
+              example:
+                status: ERROR
+                response: Internal Server Error
+  /validateIP:
+    post:
+      security:
+        - bearerAuth: []
+        - ApiAuthKey: []
+      operationId: validateip
+      tags:
+        - ValidateIP
+      description:
+          This operation is used for that a given IP belongs to a given CIDR ip address block
+      parameters:
+        - in: query
+          name: ip_address
+          description: The IP address to be verified
+          schema:
+            type: string
+            format: ipv4
+            example: 10.10.10.10
+          required: true
+        - in: query
+          name: cidr_block
+          description: The cidr block to be used for verification
+          schema:
+            type: string
+            example: 10.10.10.0/16
+          required: true
+      responses:
+        '200':
+          description: on a succesful IP validation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - ERROR
+                    - SUCCESS
+                  flag:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Valid IP
+        '400':
+          description: Error Response for invalid or missing user input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - ERROR
+                    - SUCCESS
+                  message:
+                    type: string
+                    example: Please Provide required Parameters
+        '500':
+          description: Error Response when there's error in code
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - ERROR
+                    - SUCCESS
+                  message:
+                    type: string
+                    example: Internal Server Error. Exception on validating the IP.
+components:
+  securitySchemes:
+    ApiAuthKey:        #  AWS API Gateway API Key
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: This key will be generated and added to AWS API Gateway
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ingress:
+      description: this is the ingress resource object
+      type: object
+      properties:
+        cloud_provider:
+          type: string
+          description: name of the cloud provider where the F5 LTM load balancer has to be configured
+          enum:
+            - aws
+            - azure
+            - gcp
+          example: aws
+        region:
+          type: string
+          description: name of the region on the cloud provider where the F5 LTM load balancer has to be configured
+          enum:
+            - us-east-1
+            - us-east-2
+            - us-west-1
+            - us-west-2
+          example: us-east-1
+        environment:
+          type: string
+          description: name of the environment
+          enum:
+            - dev
+            - stage
+            - prod
+          example: dev
+        tcp_upload:
+          type: string
+          description: Is TCP Upload requied? yes or no
+          enum:
+            - yes
+            - no
+          example: yes
+        health_monitor:
+          type: string
+          description: health_monitor type? tcp http or https
+          enum:
+            - tcp
+            - http
+            - https
+          example: yes
+        ssl_terminate_f5:
+          type: string
+          description: Is SSL terminated on F5? yes or no
+          enum:
+            - yes
+            - no
+          example: yes
+        ticket_number:
+          type: string
+          description: Ticket number from ServiceNow
+          example: Ticket-Number-0001
+        fqdn:
+          type: string
+          description: The Full Qualified Domain Name for the new appilcation
+          example: test.deloitte.com
+          pattern: .deloitte.com$
+        load_balancing_method:
+          type: string
+          description: The Load Balancing Method to be used by the F5 Load Balancer
+          enum:
+            - round-robin
+            - predictive-member
+            - ratio-member
+            - observed-member
+            - ratio-node
+            - fastest-node
+            - obsereved-node
+            - predictive-node
+            - ratio-session
+          example: round-robin
+        members:
+          type: string
+          description: The member list and properties
+          example: '{"members": [{"ip":"1.1.1.1", "port":"443", "status":"enabled"},{"ip":"1.1.1.2", "port":"443", "status":"disabled"}]}'
+        f5_ips:
+          type: string
+          description: The f5 ip list and ports
+          example: '{"f5_ips": [{"ip":"100.10.10.1", "port":"443"},{"ip":"100.10.10.2", "port":"8443"}]}'
+        vip_name:
+          type: string
+          description: Name of the Virtual Server to be configured on the F5 Server
+          example: virtual_server_sample_name_443
+        key_file:
+          type: string
+          format: binary
+        cert_file:
+          type: string
+          format: binary
+      required:
+        - cloud_provider
+        - region
+        - environment
+        - ssl_terminate_f5
+        - ticket_number
+        - fqdn
+        - load_balancing_method
+        - members
+        - key_file
+        - cert_file
+    default_response:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ERROR
+          - SUCCESS
+        response:
+          type: string
+          example: Internal Server Error
